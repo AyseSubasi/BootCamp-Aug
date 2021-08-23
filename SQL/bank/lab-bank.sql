@@ -64,6 +64,7 @@ select count(loan_id), date from loan where date < 930907 group by date order by
 select distinct duration, count(duration), date from loan where date between 971201 and 971230 group by date, duration order by date desc, duration desc;
 
 #Q18
-select account_id, type, sum(amount) as total_amount from trans where account_id = 396 group by type,account_id;
+select account_id, type, sum(amount) as total_amount from trans where account_id = 396 group by type,account_id order by type;
 
+#Q19
 
