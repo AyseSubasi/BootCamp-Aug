@@ -47,11 +47,9 @@ select sum(payment.amount) as total_paid_by_customer, customer.last_name, custom
  order by customer.last_name asc;
 
 -- Bonus: most rented film? - Bucket Brotherhood
-#rental ->  inventory - > film
-select  * from rental; # rental_date
-select * from inventory; #inventory_id
-select * from film;
+#film(title) film_id -> inventory inventory_id - > rental (rental_date)
 
-select count(rental.inventory_id), film.title from film inner join rental on rental.inventory_id = inventory.inventory_id
-inner join film on film.film_id = inventory.film_id
-group by film.title order by count(rental.inventory_id) desc;
+select film.title, count(rental.rental_date) from film
+inner join inventory on inventory.film_id = film.film_id
+inner join rental on inventory.inventory_id = rental.inventory_id
+group by film.title order by count(rental.rental_date) desc; 
