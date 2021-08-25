@@ -45,7 +45,11 @@ select staff_id ,first_name, last_name from staff; #staff id 1
 insert into rental values(1002222, "2021-08-25" ,1002222 ,130, "2021-09-25" ,1,"2022-09-25");
 
 -- 9 
+-- Check if there are any non-active users
+select * from customer
 
-create table deleted_users (customer_id int, email not null, date current_timestamp)
+select active, customer_id from customer where active=0;
 
+-- Create a table backup table as suggested
 
+create table deleted_users (customer_id int, email not null, date )
