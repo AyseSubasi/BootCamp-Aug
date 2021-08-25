@@ -75,6 +75,8 @@ select film_id from inventory where inventory_id in(
 select inventory_id from rental where customer_id = (select customer_id from payment
 group by customer_id order by sum(amount) desc limit 1)));
 
+#film id 226 -> destiny saturday
+
 -- 8 customer who spent more the avg payments
 
 select avg(amount) from payment;
