@@ -37,19 +37,37 @@ insert into staff values
 select customer_id from sakila.customer
 where first_name = 'CHARLOTTE' and last_name = 'HUNTER'; # customer id 130
 
-select * from rental;
-rental_id; rental_date, inventory_id, customer_id, return_date,staff_id last_update
 
-select staff_id ,first_name, last_name from staff; #staff id 1 
+select staff_id ,first_name, last_name from staff; #staff  id 1 
+select inventory_id, film_id from inventory where film_id = 1 and store_id = 1; #inventory id 1-4;
+select film_id, title from film where title like "%DINOSAUR"; # film id = 1
 
-insert into rental values(1002222, "2021-08-25" ,1002222 ,130, "2021-09-25" ,1,"2022-09-25");
+select inventory_id from rental order by inventory_id desc; 
+
+
+insert into rental (rental_date,inventory_id,customer_id,return_date,staff_id,last_update)
+values ("2021-08-26 14:11:53",1,130, "2021-09-25",1,"2006-02-15 21:30:53");
+
+# new row with rental id 443
 
 -- 9 
 -- Check if there are any non-active users
-select * from customer
 
-select active, customer_id from customer where active=0;
+select active ,customer_id from customer where active=0; # non active-users
 
--- Create a table backup table as suggested
+-- Create a table backup table 
 
-create table deleted_users (customer_id int, email not null, date )
+create table if not exists deleted_users
+( customer_id int, email varchar(45) not null, date datetime,
+constraint primary key (customer_id));
+
+-- insert non active users in the table backup table
+
+insert into deleted_users (customer_id,email) select customer_id, email from customer where active=0;
+
+select * from deleted_users;
+
+-- delete non active customers
+
+delete from customer where active= "0";
+
