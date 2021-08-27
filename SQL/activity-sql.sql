@@ -33,3 +33,23 @@ delete from players where team_id = 3;
 
 drop table players;
 
+select `Renew Offer Type` from lab_db.data_marketing_customer_analysis_round2
+
+give me the frist 10 accounts - > 
+
+
+## prcedure 
+use bank;
+
+DELIMITER // 
+create procedure det_district_id_by_account (in account_id int, out district_id int)
+begin
+select district_id = account_id
+where account_id = account_id;
+end // 
+DELIMITER ; 
+call get_district_id_by_account (7, @district); 
+
+select @district 
+
+
